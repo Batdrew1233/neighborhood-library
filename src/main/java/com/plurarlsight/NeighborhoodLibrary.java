@@ -80,7 +80,7 @@ public class NeighborhoodLibrary {
                 books[i].setCheckedOutTo(userName);
                 books[i].setCheckOut(true);
 
-                System.out.println(books[i] + "| Processing...");
+                System.out.println("Processing...");
                 Thread.sleep(1000);
                 System.out.println("Done, you've checked out the book.");
                 found = true;
