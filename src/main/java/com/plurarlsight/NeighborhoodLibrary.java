@@ -55,7 +55,9 @@ public class NeighborhoodLibrary {
         System.out.println("All Available Books:");
 
         for (int i = 0; i < numBooks; i++) {
-            System.out.println(books[i]);
+            if (!books[i].isCheckOut()) {
+                System.out.println(books[i]);
+            }
 
         }
 
@@ -92,6 +94,11 @@ public class NeighborhoodLibrary {
     //Method to move book to checked out
 
 
+
+    }
+
+    //Method to display checked out books and check in a book
+    public static void checkInBooks(){
 
     }
 }
