@@ -25,18 +25,17 @@ public class NeighborhoodLibrary {
             System.out.println("3: Exit");
             System.out.println("Enter your command:");
 
-            int command = scanner.nextInt();
-            scanner.nextLine();
+            String command = scanner.nextLine();
             // Switch case the user can input a command
             switch (command) {
-                case 1:
+                case "1":
                     allAvailableBooks();
                     checkBookOut(scanner);
                     break;
-                case 2:
+                case "2":
                     checkInBooks(scanner);
                     break;
-                case 3:
+                case "3":
                     System.out.println("Exiting!");
                     isDone = true;
                     break;
@@ -143,6 +142,8 @@ public class NeighborhoodLibrary {
                 System.out.println("Invalid ID Try Again.");
             }
 
+        }else {
+            System.out.println("Invalid Input Try Again");
         }
 
     }
