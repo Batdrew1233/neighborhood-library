@@ -27,15 +27,14 @@ public class NeighborhoodLibrary {
 
             int command = scanner.nextInt();
             scanner.nextLine();
-
+            // Switch case the user can input a command
             switch (command) {
                 case 1:
                     allAvailableBooks();
                     checkBookOut(scanner);
-
                     break;
                 case 2:
-
+                    checkInBooks(scanner);
                     break;
                 case 3:
                     System.out.println("Exiting!");
@@ -72,6 +71,7 @@ public class NeighborhoodLibrary {
         if (checkOutCommand.equalsIgnoreCase("Exit")) {
             return;
         }
+        //Will see if the title in array matches the user input title
         for (int i = 0; i < numBooks; i++) {
             if (books[i].getTitle().equalsIgnoreCase(checkOutCommand)) {
                 System.out.println("What is your name?: ");
@@ -88,17 +88,62 @@ public class NeighborhoodLibrary {
             }
 
         }
+        //If book not found it will print the statement
         if (!found){
             System.out.println("No book found, try again.");
         }
-    //Method to move book to checked out
-
-
 
     }
 
     //Method to display checked out books and check in a book
-    public static void checkInBooks(){
+    public static void checkInBooks(Scanner scanner) throws InterruptedException {
+        System.out.println("List Of Checked Out Books:");
+        boolean booksCheckedOut = false;
+        //Will display all checked out books if there is any
+        for (int i = 0; i < numBooks; i++) {
+            if (books[i].isCheckOut()) {
+                System.out.println(books[i]);
+                booksCheckedOut = true;
+            }
+        }
+        // If there is no checked out books 'yet' it will print a statement and return to try again
+        if (!booksCheckedOut){
+                System.out.println("No books currently checked out.");
+                return;
+            }
+
+        System.out.println("Press C to check in a book or X to go back:");
+        String userInput = scanner.nextLine();
+        // If the user picks x it will exit and if they pick c it will ask for the book ID
+        if (userInput.equalsIgnoreCase("x")){
+            System.out.println("Exiting");
+            Thread.sleep(1000);
+        } else if (userInput.equalsIgnoreCase("c")) {
+            System.out.println("Enter book ID to check in:");
+            int bookId = scanner.nextInt();
+            scanner.nextLine();
+            //A boolean to help check if the user id and book id match
+            boolean found = false;
+            // Goes through the array and continues if the getId is equal to the userid input and if the book is checked out.
+            //It will also check in the book selected
+            for (int i = 0; i < numBooks; i++) {
+                if (books[i].getId() == bookId && books[i].isCheckOut()){
+                    books[i].setCheckOut(false);
+                    books[i].setCheckedOutTo("");
+                    System.out.println("Processing...");
+                    Thread.sleep(1000);
+                    System.out.println("Book checked in successfully!");
+                    found = true;
+                    break;
+                }
+
+            }
+            //If the id is put in wrong or cant be found it will print this out.
+            if (!found){
+                System.out.println("Invalid ID Try Again.");
+            }
+
+        }
 
     }
 }
